@@ -1,3 +1,4 @@
+<?php require('../util/dbConnection.php'); ?>
 <html>
 <head>
 </head>
@@ -157,7 +158,7 @@ function GetExamReserved($userId){
 function GetExamDetailFromId($examId){
 	$query = "SELECT * FROM exams WHERE id='".$examId."'";
 	$examDetail = mysqli_fetch_array(SendQuery($query));
-	$query = "SELECT nome FROM courses WHERE id='".$examDetail['corso']."'";
+	$query = "SELECT nome FROM courses WHERE id='".$examDetail['idCorso']."'";
 	//echo $query;
 	$courseName = mysqli_fetch_assoc(SendQuery($query));
 	$name = $courseName['nome'];
@@ -217,7 +218,7 @@ function AssignCourse($selection){
 	}
 	return true;
 }
-	
+/*	
 function SendQuery($query){
 	$servername = "localhost";
 	$usernameDb = "webuser";
@@ -235,5 +236,5 @@ function SendQuery($query){
 		
 	return $result;
 }
-
+*/
 ?>

@@ -1,3 +1,6 @@
+<?php require('../util/dbConnection.php'); ?>
+<?php require('../util/cookie.php'); ?>
+
 <html>
 <head></head>
 <body>
@@ -6,14 +9,27 @@ if(isset($_GET['action'])){
 	if($_GET['action']=="new")
 		CreateMailForm(0);
 	if($_GET['action']=="received"){
-		print_r(GetEmailDetail($_GET['id']));
+		$email = GetEmailDetail($_GET['id']);
+		print_r($email);
+		$query = "UPDATE emails SET letto=1 WHERE id=".$email['id'];
+		SendQuery($query);
 	}
 	if($_GET['action']=="sent"){
-		
+		print_r(GetEmailDetail($_GET['id']));		
 	}
 	if($_GET['action']=="forward"){
 	
 	}
+	if($_GET['action']=="Invia"){
+		
+	}
+}
+if(isset($_POST['Submit'])){
+	if($_POST['Submit']=="Invia")
+		$uId = GetUserId();
+		$query = 	"INSERT INTO emails (idMittente, idDestinatario, oggetto, testo) ".
+					"VALUES ('".$uId."', '".$_POST['destinatario']."', '".$_POST['oggetto']."', '".$_POST['testo']."')";
+		SendQuery($query);
 }
 ?>
 </body>
@@ -21,7 +37,7 @@ if(isset($_GET['action'])){
 
 <?php
 function CreateMailForm($action){
-	echo	"<form id='createExam' action='?action' method='post' accept-charset='UTF-8'>\n";
+	echo	"<form id='newMail' action='?action=Invia' method='post' accept-charset='UTF-8'>\n";
 	echo 	"<fieldset>\n";
 	echo 	"<legend>Nuova email</legend>\n";
 	echo	"<label for='courseName'>A: </label>\n";
@@ -51,7 +67,7 @@ function GetEmailDetail($mailId){
 	$query = "SELECT * FROM emails WHERE id='".$mailId."' ORDER BY data ASC";
 	return mysqli_fetch_assoc(SendQuery($query));
 }
-
+/*
 function GetUserId(){
 	$userDetail = json_decode($_COOKIE['user'], true);
 	$userName = $userDetail['user'];
@@ -65,7 +81,6 @@ function GetUserId(){
 		return $val['id'];
 	}
 	return "nope";
-
 }
 
 function SendQuery($query){
@@ -86,5 +101,6 @@ function SendQuery($query){
 
 	return $result;
 }
+*/
 ?>
 

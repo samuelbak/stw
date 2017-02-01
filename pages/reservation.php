@@ -1,3 +1,5 @@
+<?php require('../util/dbConnection.php'); ?>
+<?php require('../util/cookie.php'); ?>
 <html>
 <head>
 </head>
@@ -100,7 +102,7 @@ function GetExamReserved($userId){
 function GetExamDetailFromId($examId){
 	$query = "SELECT * FROM exams WHERE id='".$examId."'";
 	$examDetail = mysqli_fetch_array(SendQuery($query));
-	$query = "SELECT nome FROM courses WHERE id='".$examDetail['corso']."'";
+	$query = "SELECT nome FROM courses WHERE id='".$examDetail['idCorso']."'";
 	//echo $query;
 	$courseName = mysqli_fetch_assoc(SendQuery($query));
 	$name = $courseName['nome'];
@@ -121,7 +123,7 @@ function GetExamName($courseId){
 }
 
 function GetExamsDetail($examId){
-	$query = "SELECT * FROM exams WHERE corso='".$examId."'";
+	$query = "SELECT * FROM exams WHERE idCorso='".$examId."'";
 	return SendQuery($query);
 	
 }
@@ -129,41 +131,6 @@ function GetExamsDetail($examId){
 function GetCoursesEnabledFromUserId($userId){
 	$query = "SELECT idCorso FROM usersdetail WHERE idUtente='".$userId."'";
 	return SendQuery($query);
-}
-
-function GetUserId(){
-	$userDetail = json_decode($_COOKIE['user'], true);
-	$userName = $userDetail['user'];
-	
-	$query = "SELECT id FROM users WHERE username='".$userName."'";
-	
-	$result = SendQuery($query);
-
-	if($result){
-		$val = mysqli_fetch_assoc($result);
-		return $val['id'];
-	}
-	return "nope";
-	
-}
-
-function SendQuery($query){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-
-	if (!$conn) {
-		return false;
-	}
-
-	$result = $conn->query($query);
-	
-	$conn->close();
-	
-	return $result;
 }
 
 ?>

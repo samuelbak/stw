@@ -1,3 +1,6 @@
+<?php require('../util/dbConnection.php'); ?>
+<?php require('../util/cookie.php'); ?>
+
 <Html>
 <head>
 	<link rel="stylesheet" type="text/css" href="/styles/email.css">
@@ -16,7 +19,8 @@
 </body>
 </Html>
 
-<?php 
+<?php
+/*
 function GetUserId(){
 	$userDetail = json_decode($_COOKIE['user'], true);
 	$userName = $userDetail['user'];
@@ -51,4 +55,5 @@ function SendQuery($query){
 
 	return $result;
 }
+*/
 ?>

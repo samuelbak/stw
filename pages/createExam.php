@@ -104,7 +104,7 @@ function CreateExam($idRef, $data, $ora, $loc){
 	//YYYY-MM-DD HH:MM:SS
 	$dateTime = $dataFormatted." ".$oraFormatted;
 	
-	$qry = "INSERT INTO exams (corso, data, loc) VALUES ('$idRef', '$dateTime', '$loc')";
+	$qry = "INSERT INTO exams (idCorso, data, loc) VALUES ('$idRef', '$dateTime', '$loc')";
 	
 	if ($conn->query($qry) === TRUE) {
 		return true;
