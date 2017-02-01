@@ -1,0 +1,50 @@
+@CHARSET "ISO-8859-1";
+form{
+   margin: 0 auto;
+   width:250px;
+}
+
+input[type=submit]  {
+	width: 100px;
+    background: #0080ff;
+    border: none;
+    display: inline;
+    font: inherit;
+    margin: 0;
+    padding: 14px 25px;
+    outline: none;
+    outline-offset: 0;
+    color: white;
+    cursor: pointer;
+}
+input[type="button"]::-moz-focus-inner,
+button::-moz-focus-inner {
+    border: none;
+    padding: 0;
+}
+
+input[type=submit]:hover  {
+    background: #00ffff;
+    border: none;
+    display: inline;
+    font: inherit;
+    margin: 0;
+    padding: 14px 25px;
+    outline: none;
+    outline-offset: 0;
+    color: white;
+    cursor: pointer;
+}
+
+a:link, a:visited {
+    background-color: #0080ff;
+    color: white;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+    background-color: #00ffff;
+}

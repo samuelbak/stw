@@ -1,0 +1,62 @@
+@CHARSET "ISO-8859-1";
+
+#emailMenu_iframe_div {
+	overflow: hidden;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 5%;
+    border: 1px solid #0080ff;
+}
+#iframe_emailMenu {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    rigth: 0px;
+    width: 100%; 
+    height: 100%;
+    border: 1px solid #ffffff;
+}
+/******************************/
+#emailList_iframe_div {
+	overflow: hidden;
+    position: absolute;
+    top: 5%;
+    left: 0%;
+    width: 20%;
+    height: 95%;
+    border: 1px solid #0080ff;
+}
+#iframe_emailList {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    rigth: 0px;
+    width: 100%; 
+    height: 100%;
+    border: 1px solid #ffffff;
+}
+/******************************/
+#emailView_iframe_div {
+	overflow: hidden;
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    width: 80%;
+    height: 95%;
+    border: 1px solid #0080ff;
+}
+#iframe_emailView {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    rigth: 0px;
+    width: 100%; 
+    height: 100%;
+    border: 1px solid #ffffff;
+}
+/******************************/

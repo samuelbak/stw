@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+a:link, a:visited {
+    background-color: #0080ff;
+    color: white;
+    padding: 4px 25px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    width: 120px; 
+    height: 20px;
+
+}
+
+a:hover, a:active {
+    background-color: #00ffff;
+}
