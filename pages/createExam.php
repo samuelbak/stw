@@ -1,6 +1,6 @@
+<?php require('../util/dbConnection.php'); ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/styles/calendar.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -11,7 +11,6 @@
   } );
   </script>
 </head>
-
 
 <body>
 
@@ -51,29 +50,16 @@ if(isset($_POST['submitted']) && $_POST['corso']!=0){
 	if(CreateExam($_POST['corso'], $_POST['date'], $_POST['time'], $_POST['loc'])){
 		echo "Esame creato correttamente";
 	}else 
-		echo "Qualcosa è andato storto";
-		
+		echo "Qualcosa è andato storto";	
 }
 else{
 	echo "Nessun corso selezionato";
 }
 
-
 function GetCourses(){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-	
-	if (!$conn) {
-		return false;
-	}
-	
 	$qry = "SELECT id, nome FROM courses";
 	
-	$result = $conn->query($qry);
+	$result = SendQuery($qry);
 	
 	if ($result->num_rows <= 0)
 		return false;
@@ -82,16 +68,6 @@ function GetCourses(){
 }
 
 function CreateExam($idRef, $data, $ora, $loc){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-	
-	if (!$conn) {
-		return false;
-	}
 	$dataFormatted = str_replace("/", "-", $data);
 	$year = substr($dataFormatted, -4);
 	$dataFormatted = $year."-".$dataFormatted;
@@ -106,31 +82,15 @@ function CreateExam($idRef, $data, $ora, $loc){
 	
 	$qry = "INSERT INTO exams (idCorso, data, loc) VALUES ('$idRef', '$dateTime', '$loc')";
 	
-	if ($conn->query($qry) === TRUE) {
+	$result = SendQuery($qry);
+	
+	if ($result === TRUE) {
 		return true;
 	} else {
 		return false;
 	}
-	
-	
 }
 ?>
-
 
 </body>
 </html>
-
-
-<?php
-/*
-include(dirname(__DIR__).'/util/calendar.php');
-$userDetail = json_decode($_COOKIE['user'], true);
-$isAdmin = $userDetail['isAdmin'];
-if (!$isAdmin==1){
-	echo "Non hai i privilegi per visualizzare questa pagina";
-}else{
-	echo "Crea esame";
-	//echo draw_calendar(10, 2016);
-}
-*/
-?>
