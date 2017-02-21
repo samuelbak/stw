@@ -1,3 +1,4 @@
+<?php require('../util/cookie.php'); ?>
 <html>
 <head>
 	<title>Virtual campus</title>
@@ -5,7 +6,6 @@
 </head>
 
 <body>
-
 
 <?php 
 if(!isset($_COOKIE['user'])) {
@@ -36,7 +36,7 @@ if(!isset($_COOKIE['user'])) {
 
 <?php 
 if(isset($_GET['logout'])) {
-	setcookie('user', null, 0, '/');
+	clearCookie();
 	echo "<script type='text/javascript'> document.location = '/index.php'; </script>";
 }
 ?>

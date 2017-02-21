@@ -19,4 +19,7 @@
 		$user = array("nome"=> $nome, "cognome"=>$cognome, "user"=>$username, "isAdmin"=>$isAdmin);
 		setcookie($cookie_name, json_encode($user), time() + (86400 * 30), "/"); // 86400 = 1 day
 	}
+	function clearCookie(){
+		setcookie('user', null, 0, '/');
+	}
 ?>
