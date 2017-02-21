@@ -6,16 +6,6 @@
 
 <body>
 <?php
-
-
-// Check connection
-/*
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully";
-*/
-
 if(isset($_COOKIE['user'])) {
 	echo "<script type='text/javascript'> document.location = 'pages/home.php'; </script>";
 } else {
