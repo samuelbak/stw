@@ -1,3 +1,5 @@
+<?php require('../util/dbConnection.php'); ?>
+<?php require('../util/cookie.php'); ?>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/styles/courses.css">
@@ -32,40 +34,4 @@ function GetExamName($courseId){
 	$ar = mysqli_fetch_assoc($result);
 	return $ar['nome'];
 }
-
-function GetUserId(){
-	$userDetail = json_decode($_COOKIE['user'], true);
-	$userName = $userDetail['user'];
-
-	$query = "SELECT id FROM users WHERE username='".$userName."'";
-
-	$result = SendQuery($query);
-
-	if($result){
-		$val = mysqli_fetch_assoc($result);
-		return $val['id'];
-	}
-	return "nope";
-
-}
-
-function SendQuery($query){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-
-	if (!$conn) {
-		return false;
-	}
-
-	$result = $conn->query($query);
-
-	$conn->close();
-
-	return $result;
-}
-
 ?>

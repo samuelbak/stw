@@ -14,19 +14,15 @@
 					echo "<a href='/pages/emailView.php?id=".$email['id']."&action=".$_GET['display']."' target='iframe_emailView'><b>".$email['oggetto']."</b></a><br>";
 			}
 		}
-	
 	?>
-
 </body>
 </html>
-
 <?php	
 	function GetEmailsList($userId, $folder){
 		if($folder == "sent")
 			$query = "SELECT * FROM emails WHERE idMittente='".$userId."' ORDER BY data ASC";
 		if($folder == "received")
 			$query = "SELECT * FROM emails WHERE idDestinatario='".$userId."' ORDER BY data ASC";
-		return SendQuery($query);
-		
+		return SendQuery($query);	
 	}
 ?>

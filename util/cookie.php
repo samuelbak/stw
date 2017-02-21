@@ -13,4 +13,10 @@
 		}
 		return "nope";
 	}
+	
+	function set_cookie($nome, $cognome, $username, $isAdmin){
+		$cookie_name = "user";
+		$user = array("nome"=> $nome, "cognome"=>$cognome, "user"=>$username, "isAdmin"=>$isAdmin);
+		setcookie($cookie_name, json_encode($user), time() + (86400 * 30), "/"); // 86400 = 1 day
+	}
 ?>

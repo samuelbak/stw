@@ -1,3 +1,5 @@
+<?php require('../util/dbConnection.php'); ?>
+<?php require('../util/cookie.php'); ?>
 <html>
 <head>
 <title>Login</title>
@@ -5,7 +7,6 @@
 </head>
 
 <body>
-
 
 <form id='register' action='?submitted' method='post' accept-charset='UTF-8'>
 <fieldset >
@@ -37,11 +38,6 @@ if(isset($_POST['submitted'])){
 }
 
 function NewUser(){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
 	if(empty($_POST['username']))
 	{
 		return false;
@@ -60,21 +56,14 @@ function NewUser(){
 	
 	if(!CheckPwd($password, $password2))
 		return false;
-		
-	
 	if(!IsUserAvailable($username))
 		return false;
 	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-	
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-		echo "db error";
-	}
-	
 	$qry = "INSERT INTO users (nome, cognome, username, password, isAdmin) VALUES  ('$firstName', '$lastName' ,'$username', '$password', '0')";
 	
-	if ($conn->query($qry) === TRUE) {
+	$res = SendQuery($qry);
+	
+	if ($res === TRUE) {
 		return true;
 	} else {
 		return false;
@@ -85,40 +74,22 @@ function Login()
 {
 	$username = trim($_POST['username']);
 	$password = trim($_POST['password']);
+	$firstName = trim($_POST['nome']);
+	$lastName = trim($_POST['cognome']);
 
 	$userDetail = CheckLoginInDB($username,$password);
 
 	$row = mysqli_fetch_assoc($userDetail);
-	set_cookie($username, $row["isAdmin"]);
+	set_cookie($firstName, $lastName, $username, $row["isAdmin"]);
 	return true;
-}
-
-function set_cookie($username, $isAdmin){
-	$cookie_name = "user";
-	$user = array("user"=>$username, "isAdmin"=>$isAdmin);
-	setcookie($cookie_name, json_encode($user), time() + (86400 * 30), "/"); // 86400 = 1 day
-
 }
 
 function CheckLoginInDB($username,$password)
 {
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-
-	// Create connection
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-		echo "db error";
-	}
-
 	$qry = "Select username, password, isAdmin from users ".
 			" where username='$username' and password='$password' ";
 	
-	$result = mysqli_query($conn, $qry);
+	$result = SendQuery($qry);
 
 	if($result && mysqli_num_rows($result) > 0){
 		return $result;
@@ -128,22 +99,9 @@ function CheckLoginInDB($username,$password)
 }
 
 function IsUserAvailable($username){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
-	// Create connection
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-	
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-		echo "db error";
-	}
-	
 	$qry = 	"Select username from users ".
 			" where username='$username'";
-	$result = mysqli_query($conn, $qry);
+	$result = SendQuery($qry);
 	
 	if($result && mysqli_num_rows($result) > 0){
 		return false;
@@ -158,8 +116,6 @@ function CheckPwd($pwd1, $pwd2){
 	else 
 		return false;
 }
-
-
 ?>
  
 </fieldset>

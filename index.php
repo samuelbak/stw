@@ -12,6 +12,5 @@ if(isset($_COOKIE['user'])) {
 	echo "<script type='text/javascript'> document.location = 'pages/login.php'; </script>";
 }
 ?>
-	
 </body>
 </html>	

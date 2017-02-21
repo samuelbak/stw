@@ -8,6 +8,8 @@ function SendQuery($query){
 	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
 
 	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+		echo "db error";
 		return false;
 	}
 

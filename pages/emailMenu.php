@@ -6,7 +6,6 @@
 	$query = "SELECT COUNT(*) AS unread FROM (SELECT * FROM emails WHERE emails.idDestinatario=".$userId." AND emails.letto=0) AS received";
 	$row = mysqli_fetch_assoc(SendQuery($query));
 	$unread = $row['unread'];
-	
 ?>
 <html>
 <head>

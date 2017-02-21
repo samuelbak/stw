@@ -45,8 +45,6 @@
 </body>
 </html>
 
-
-
 <?php
 	if(isset($_GET['idExam'])){
 		InsertExam($_GET['idExam']);
@@ -103,7 +101,6 @@ function GetExamDetailFromId($examId){
 	$query = "SELECT * FROM exams WHERE id='".$examId."'";
 	$examDetail = mysqli_fetch_array(SendQuery($query));
 	$query = "SELECT nome FROM courses WHERE id='".$examDetail['idCorso']."'";
-	//echo $query;
 	$courseName = mysqli_fetch_assoc(SendQuery($query));
 	$name = $courseName['nome'];
 	return array("id"=>$examDetail['id'], "nome"=>$name, "data"=>$examDetail['data'], "luogo"=>$examDetail['loc']);
@@ -125,7 +122,6 @@ function GetExamName($courseId){
 function GetExamsDetail($examId){
 	$query = "SELECT * FROM exams WHERE idCorso='".$examId."'";
 	return SendQuery($query);
-	
 }
 
 function GetCoursesEnabledFromUserId($userId){

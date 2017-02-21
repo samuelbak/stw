@@ -55,7 +55,6 @@
 	?>
 </fieldset>
  
- 
 </body>
 </html>
 
@@ -63,14 +62,12 @@
 	if (!isset($_GET['id'])){
 		header("about:blank");
 	}
-
 	if (isset($_POST['addCourse'])){
 		if(AssignCourse($_POST))
 			echo "Corso assegnato correttamente";
 		else 
 			echo "Qualcosa è andato storto";
-	}
-	
+	}	
 	if (isset($_POST['Submit'])){
 		if($_POST['Submit']=="Modifica")
 			EditResults($_POST['userId'],$_POST['examId'],$_POST['selEsito']);
@@ -103,7 +100,6 @@ function IsStateSelected($examId, $userId){
 	$query = "SELECT stato FROM results WHERE idUtente='".$userId."' AND idEsame='".$examId."'";
 	$result = SendQuery($query);
 	$row = mysqli_fetch_assoc($result);
-
 }
 
 function CreateModifyForm($examId, $userId){
@@ -159,82 +155,35 @@ function GetExamDetailFromId($examId){
 	$query = "SELECT * FROM exams WHERE id='".$examId."'";
 	$examDetail = mysqli_fetch_array(SendQuery($query));
 	$query = "SELECT nome FROM courses WHERE id='".$examDetail['idCorso']."'";
-	//echo $query;
 	$courseName = mysqli_fetch_assoc(SendQuery($query));
 	$name = $courseName['nome'];
 	return array("id"=>$examDetail['id'], "nome"=>$name, "data"=>$examDetail['data'], "luogo"=>$examDetail['loc']);
 }
 
 function GetCourses(){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-
-	if (!$conn) {
-		return false;
-	}
-
 	$qry = "SELECT id, nome FROM courses ORDER BY nome ASC";
-	$result = $conn->query($qry);
+	$result =SendQuery($qry);
 
 	if ($result->num_rows <= 0){
 		return false;
-		$conn->close();
 	}else{
 		return $result;
-		$conn->close();
 	}
 }
 	
 function GetActive($user){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-				
-	$qry = "SELECT * FROM usersdetail WHERE idUtente='".$user."'";
-		
-	$result = $conn->query($qry);
-		
-	$conn->close();
-		
+	$qry = "SELECT * FROM usersdetail WHERE idUtente='".$user."'";		
+	$result = SendQuery($qry);
 	return $result;
 }
 	
 function AssignCourse($selection){
-
-	echo SendQuery("DELETE QUICK FROM usersdetail WHERE idUtente='".$selection['userId']."'");		
-
+	SendQuery("DELETE QUICK FROM usersdetail WHERE idUtente='".$selection['userId']."'");
 	$keys = array_keys($selection);
-	$element = count($keys);
-		
+	$element = count($keys);		
 	for($i = 2; $i<($element-1);$i++){
 		echo SendQuery("INSERT INTO usersdetail (idUtente, idCorso) VALUES ('".$selection['userId']."', '".$selection[$keys[$i]]."')");
 	}
 	return true;
 }
-/*	
-function SendQuery($query){
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
-	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-	if (!$conn) {
-		return false;
-	}
-		
-	$result = $conn->query($query);
-		
-	$conn->close();
-		
-	return $result;
-}
-*/
 ?>
