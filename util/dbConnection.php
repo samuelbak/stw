@@ -1,10 +1,16 @@
 <?php
 function SendQuery($query){
-	$servername = "localhost";
+	/*
+	$servername = "localhost";		//local
 	$usernameDb = "webuser";
 	$passwordDb = "webpassword";
 	$dbname = "virtualcampus";
-
+	*/
+	$servername = "localhost";		//remote
+	$usernameDb = "s.bacchetta";
+	$passwordDb = "b4cch3tt4";
+	$dbname = "s_bacchetta";
+	
 	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
 
 	if (!$conn) {

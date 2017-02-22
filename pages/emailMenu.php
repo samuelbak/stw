@@ -9,7 +9,7 @@
 ?>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/styles/emailMenu.css">
+	<link rel="stylesheet" type="text/css" href="../styles/emailMenu.css">
 </head>
 <body>
 	<a href="#" onClick="changetwo('./emailView.php?action=new','about:blank')">Nuovo messaggio</a>

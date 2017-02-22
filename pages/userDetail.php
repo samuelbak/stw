@@ -55,6 +55,21 @@
 		}
 	?>
 </fieldset>
+
+<fieldset>
+	<legend>Rendi amministratore</legend>
+	<?php if (isset($_GET['id'])){
+		$checked = "";
+		if (isAdmin($_GET['id']) == 1)
+			$checked = "checked='checked'";
+	echo "<form id='makeAdmin' action='?makeAdmin' method='post' accept-charset='UTF-8'>";
+		echo "<input type='hidden' name='userId' id='userId' value='".$_GET['id']."'/>";
+		echo "<input type='checkbox' name='admin' value='admin' ".$checked."> Amministratore";
+		echo "<input type='submit' name='Submit' value='Applica'/>";		
+	echo "</form>";
+	}
+	?>
+</fieldset>
  
 </body>
 </html>
@@ -75,11 +90,25 @@
 				EditResults($_POST['userId'],$_POST['examId'],$_POST['selEsito'],1);
 			else 
 				EditResults($_POST['userId'],$_POST['examId'],$_POST['selEsito'],0);
-		}		
+		}
+		if($_POST['Submit']=="Applica"){
+			if(isset($_POST['admin']))
+				$query = "UPDATE users SET isAdmin='1' WHERE id='".$_POST['userId']."'";
+			else 
+				$query = "UPDATE users SET isAdmin='0' WHERE id='".$_POST['userId']."'";
+			SendQuery($query);
+		}
 	}
 ?>
 	
 <?php
+function isAdmin($userId){
+	$query = "SELECT isAdmin FROM users WHERE id='".$userId."'";
+	$result = SendQuery($query);
+	$row = mysqli_fetch_assoc($result);
+	return $row['isAdmin'];
+}
+
 function EditResults($userId, $examId, $result, $notify){
 	$examDetail = GetExamDetailFromId($examId);
 	$object = "Aggiornamento esame ".$examDetail['nome'];
