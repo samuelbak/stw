@@ -6,6 +6,10 @@
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="../styles/login.css">
 </head>
+<header>
+<a target="_blank" href="../Analisi preliminare.pdf">Documento preliminare</a>
+<a target="_blank" href="../Relazione.pdf">Relazione</a>
+</header>
 
 <body>
 
