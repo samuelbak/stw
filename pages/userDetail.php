@@ -1,4 +1,5 @@
 <?php require('../util/dbConnection.php'); ?>
+<?php require('../util/cookie.php'); ?>
 <html>
 <head>
 </head>
@@ -69,13 +70,19 @@
 			echo "Qualcosa è andato storto";
 	}	
 	if (isset($_POST['Submit'])){
-		if($_POST['Submit']=="Modifica")
-			EditResults($_POST['userId'],$_POST['examId'],$_POST['selEsito']);
+		if($_POST['Submit']=="Modifica"){
+			if(isset($_POST['Notifica']))
+				EditResults($_POST['userId'],$_POST['examId'],$_POST['selEsito'],1);
+			else 
+				EditResults($_POST['userId'],$_POST['examId'],$_POST['selEsito'],0);
+		}		
 	}
 ?>
 	
 <?php
-function EditResults($userId, $examId, $result){
+function EditResults($userId, $examId, $result, $notify){
+	$examDetail = GetExamDetailFromId($examId);
+	$object = "Aggiornamento stato esame ".$examDetail['nome'];
 	if($result == 0){
 		$text = "Non superato";
 		$query = "UPDATE results SET stato='".$text."', corretto='1', verbalizzato='1' WHERE idUtente='".$userId."' AND idEsame='".$examId."'";
@@ -92,8 +99,16 @@ function EditResults($userId, $examId, $result){
 		$text = "30 e lode";
 		$query = "UPDATE results SET stato='".$text."', corretto='1', verbalizzato='1', accettato='1' WHERE idUtente='".$userId."' AND idEsame='".$examId."'";
 		}
-	if(isset($query))
+	if(isset($query)){
 		SendQuery($query);
+		SendMail($userId, GetUserId(), $object, $text);
+	}
+}
+
+function SendMail($to, $from, $object, $text){
+	$query ="INSERT INTO emails (idMittente, idDestinatario, oggetto, testo) ".
+			"VALUES ('".$from."', '".$to."', '".$object."', '".$text."')";
+	SendQuery($query);
 }
 
 function IsStateSelected($examId, $userId){
@@ -110,6 +125,7 @@ function CreateModifyForm($examId, $userId){
 	GetSelectionMenu($examId, $userId);
 	echo "</select>\n";
 	echo "<input type='submit' name='Submit' value='Modifica' />";
+	echo "<input type='checkbox' name='Notifica' value='Notifica' /> Notifica";
 	echo "</form>";
 }
 
