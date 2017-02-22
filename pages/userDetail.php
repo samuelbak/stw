@@ -82,7 +82,7 @@
 <?php
 function EditResults($userId, $examId, $result, $notify){
 	$examDetail = GetExamDetailFromId($examId);
-	$object = "Aggiornamento stato esame ".$examDetail['nome'];
+	$object = "Aggiornamento esame ".$examDetail['nome'];
 	if($result == 0){
 		$text = "Non superato";
 		$query = "UPDATE results SET stato='".$text."', corretto='1', verbalizzato='1' WHERE idUtente='".$userId."' AND idEsame='".$examId."'";
