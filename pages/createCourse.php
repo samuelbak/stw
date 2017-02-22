@@ -1,3 +1,4 @@
+<?php require('../util/dbConnection.php'); ?>
 <html>
 <head>
 	
@@ -47,23 +48,14 @@ function CreateCourse($courseName, $courseDescription){
 	{
 		return false;
 	}
-	
-	$servername = "localhost";
-	$usernameDb = "webuser";
-	$passwordDb = "webpassword";
-	$dbname = "virtualcampus";
+
 	$name = trim($_POST['courseName']);
 	$description = trim($_POST['courseDescription']);
 	
-	$conn = new mysqli($servername, $usernameDb, $passwordDb, $dbname);
-	
-	if (!$conn) {
-		return false;
-	}
-	
 	$qry = "INSERT INTO courses (nome, descrizione) VALUES  ('$name', '$description')";
+	$result = SendQuery($qry);
 	
-	if ($conn->query($qry) === TRUE) {
+	if ($result === TRUE) {
 		return true;
 	} else {
 		return false;

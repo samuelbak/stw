@@ -9,9 +9,9 @@
 			$emailsList = GetEmailsList(GetUserId(),$_GET['display']);
 			while ($email = mysqli_fetch_assoc($emailsList)){
 				if ($email['letto']==1)
-					echo "<a href='/pages/emailView.php?id=".$email['id']."&action=".$_GET['display']."' target='iframe_emailView'>".$email['oggetto']."</a><br>";
+					echo "<a href='./emailView.php?id=".$email['id']."&action=".$_GET['display']."' target='iframe_emailView'>".$email['oggetto']."</a><br>";
 				else 
-					echo "<a href='/pages/emailView.php?id=".$email['id']."&action=".$_GET['display']."' target='iframe_emailView'><b>".$email['oggetto']."</b></a><br>";
+					echo "<a href='./emailView.php?id=".$email['id']."&action=".$_GET['display']."' target='iframe_emailView'><b>".$email['oggetto']."</b></a><br>";
 			}
 		}
 	?>

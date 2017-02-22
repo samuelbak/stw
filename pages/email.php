@@ -1,6 +1,6 @@
 <Html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/styles/email.css">
+	<link rel="stylesheet" type="text/css" href="../styles/email.css">
 </head>
 <body>
 <div id="emailList_iframe_div">
@@ -10,7 +10,7 @@
 	<iframe id="iframe_emailView" src="about:blank" name="iframe_emailView"></iframe>
 </div>
 <div id="emailMenu_iframe_div">
-	<iframe id="iframe_emailMenu" src="/pages/emailMenu.php" name="iframe_emailMenu">
+	<iframe id="iframe_emailMenu" src="./emailMenu.php" name="iframe_emailMenu">
 	</iframe>
 </div>
 </body>

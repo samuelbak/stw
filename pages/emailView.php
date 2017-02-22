@@ -10,12 +10,13 @@ if(isset($_GET['action'])){
 		CreateMailForm($_GET['action']);
 	if($_GET['action']=="received"){
 		$email = GetEmailDetail($_GET['id']);
-		DisplayMail($email);
+		DisplayAnswerMail($email);
 		$query = "UPDATE emails SET letto=1 WHERE id=".$email['id'];
 		SendQuery($query);
 	}
 	if($_GET['action']=="sent"){
-		print_r(GetEmailDetail($_GET['id']));		
+		$email = GetEmailDetail($_GET['id']);
+		DisplayMail($email);
 	}
 	if($_GET['action']=="forward"){
 	
@@ -41,6 +42,16 @@ if(isset($_POST['Submit'])){
 
 <?php
 function DisplayMail($email){
+	$mittente = GetUserDetail($email['idMittente']);
+	$destinatario = GetUserDetail($email['idDestinatario']);
+	echo "<h2>".$email['oggetto']."</h2>";
+	echo "<h3>".$mittente['cognome']." ".$mittente['nome']."</h3>";
+	echo "<p>Inviato: ".$email['data']."</p>";
+	echo "<br>";
+	echo "<p>".$email['testo']."</p>";
+	echo "<br>";
+}
+function DisplayAnswerMail($email){
 	$mittente = GetUserDetail($email['idMittente']);
 	$destinatario = GetUserDetail($email['idDestinatario']);
 	echo "<h2>".$email['oggetto']."</h2>";

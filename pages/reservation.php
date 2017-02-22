@@ -48,12 +48,12 @@
 <?php
 	if(isset($_GET['idExam'])){
 		InsertExam($_GET['idExam']);
-		echo "<script type='text/javascript'>document.location='/pages/reservation.php';</script>";
+		echo "<script type='text/javascript'>document.location='./reservation.php';</script>";
 	}
 	
 	if(isset($_GET['action']) && isset($_GET['resultsId'])){
 		UpdateResults($_GET['action'], $_GET['resultsId']);
-		echo "<script type='text/javascript'>document.location='/pages/reservation.php';</script>";
+		echo "<script type='text/javascript'>document.location='./reservation.php';</script>";
 	}
 ?>
 <?php

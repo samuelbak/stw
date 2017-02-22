@@ -12,9 +12,9 @@
 	<link rel="stylesheet" type="text/css" href="/styles/emailMenu.css">
 </head>
 <body>
-	<a href="#" onClick="changetwo('/pages/emailView.php?action=new','about:blank')">Nuovo messaggio</a>
-	<a href="#" onClick="changetwo('about:blank','/pages/emailList.php?display=received')">Posta in arrivo (<?php echo $unread; ?>)</a>
-	<a href="#" onClick="changetwo('about:blank','/pages/emailList.php?display=sent')">Posta inviata</a>
+	<a href="#" onClick="changetwo('./emailView.php?action=new','about:blank')">Nuovo messaggio</a>
+	<a href="#" onClick="changetwo('about:blank','./emailList.php?display=received')">Posta in arrivo (<?php echo $unread; ?>)</a>
+	<a href="#" onClick="changetwo('about:blank','./emailList.php?display=sent')">Posta inviata</a>
 </body>
 <script type="text/javascript">
 	function changetwo(url1, url2){

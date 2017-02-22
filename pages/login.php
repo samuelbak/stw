@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="/styles/login.css">
+	<link rel="stylesheet" type="text/css" href="../styles/login.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
 <?php
 if(isset($_GET['register'])) {
-	echo "<script type='text/javascript'> document.location = '/pages/register.php'; </script>";
+	echo "<script type='text/javascript'> document.location = './register.php'; </script>";
 }
 ?>
 
@@ -36,7 +36,7 @@ if(isset($_GET['register'])) {
 <?php 
 if(isset($_POST['submitted'])){
 	if (Login()){
-		echo "<script type='text/javascript'> document.location = '/pages/home.php'; </script>";
+		echo "<script type='text/javascript'> document.location = './home.php'; </script>";
 	}
 	else{
 		echo "<br> nome utente o password errata";

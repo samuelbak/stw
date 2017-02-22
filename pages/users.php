@@ -1,13 +1,13 @@
 <?php require('../util/dbConnection.php'); ?>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/styles/users.css">
+	<link rel="stylesheet" type="text/css" href="../styles/users.css">
 </head>
 
 <body>
 
 <div id="userDetail_iframe_div">
-	<iframe id="userDetail_iframe" src="/pages/userDetail.php" name="iframe_userDetail"></iframe>
+	<iframe id="userDetail_iframe" src="./userDetail.php" name="iframe_userDetail"></iframe>
 </div>
 
 </body>
@@ -20,7 +20,7 @@ if ($users == false)
 	echo "Qualcosa è andato storto :(";
 else{
 	while ($row = $users->fetch_assoc()){
-		echo "<a href='/pages/userDetail.php?id=".$row['id']."' target='iframe_userDetail'>".$row['cognome']." ".$row['nome']."</a><br>";
+		echo "<a href='./userDetail.php?id=".$row['id']."' target='iframe_userDetail'>".$row['cognome']." ".$row['nome']."</a><br>";
 	}
 }
 

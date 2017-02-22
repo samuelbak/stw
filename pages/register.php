@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="/styles/login.css">
+<link rel="stylesheet" type="text/css" href="../styles/login.css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 <?php 
 if(isset($_POST['submitted'])){
 	if (NewUser()){
-		echo "<script type='text/javascript'> document.location = '/pages/home.php'; </script>";
+		echo "<script type='text/javascript'> document.location = './home.php'; </script>";
 		Login();
 	}
 	else{

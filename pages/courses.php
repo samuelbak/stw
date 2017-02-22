@@ -2,7 +2,7 @@
 <?php require('../util/cookie.php'); ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/styles/courses.css">
+<link rel="stylesheet" type="text/css" href="../styles/courses.css">
 </head>
 
 <body>
@@ -11,16 +11,12 @@
 <iframe id="courseDetail_iframe" src="about:blank" name="iframe_courseDetail"></iframe>
 </div>
 
-
-</body>
-</html>
-
 <?php 
 
 	$courses = GetCoursesEnabledFromUserId(GetUserId());
 	while ($rowCourse = mysqli_fetch_assoc($courses)){
 		$examName = GetExamName($rowCourse['idCorso']);
-		echo "<a href='/pages/courseDetail.php?id=".$rowCourse['idCorso']."' target='iframe_courseDetail'>".$examName."</a><br>";
+		echo "<a href='./courseDetail.php?id=".$rowCourse['idCorso']."' target='iframe_courseDetail'>".$examName."</a><br>";
 	}
 
 function GetCoursesEnabledFromUserId($userId){
@@ -35,3 +31,5 @@ function GetExamName($courseId){
 	return $ar['nome'];
 }
 ?>
+</body>
+</html>
